@@ -1,13 +1,14 @@
 Hreports
 ========
+Hreportsは、オープンソースのPDF生成ライブラリ「hpdf」を用いたシンプルな帳票作成ライブラリです。
+Railsのプラグインとして提供されます。
 
-Introduction goes here.
-
+＝以下作成途中
 
 Example
 =======
 
-Example goes here.
+
 
 
 Copyright (c) 2010 [name of plugin creator], released under the MIT license
