@@ -1,1 +1,2 @@
-# Hreports
+module Hreports
+end
