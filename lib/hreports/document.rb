@@ -202,25 +202,23 @@ module Hreports
     private
 
     def draw_unit(opt = {})
-      unit_x         = opt[:x].to_f                                                           # 描画開始点のX座標（単位：セル数）
-      unit_y         = opt[:y].to_f                                                           # 描画開始点のY座標（単位：セル数）
-      unit_width     = opt[:width].to_f                                                       # セルの幅（単位：セル数）
-      unit_height    = opt[:height].to_f                                                      # セルの高さ（単位：セル数）
-      text           = opt[:text].to_s                                                        # セルの文字列
-      font_size      = opt[:font_size]      ? opt[:font_size].to_i    : @default_font_size    # セルの文字列のフォントサイズ
-      h_alignment    = opt[:h_align]        ? opt[:h_align]           : :left                 # 水平アライメント（:left, :center, :right）デフォルトは :left
-      v_alignment    = opt[:v_align]        ? opt[:v_align]           : :middle               # 垂直アライメント（:top, :middle, :bottom）デフォルトは :middle
-      without_border = opt[:without_border] ? opt[:without_border]    : false                 # 枠線描画の有無（デフォルト：false）
-      under_score    = opt[:under_score]    ? opt[:under_score]       : false                 # 文字列にアンダースコアを付加する（デフォルト： false）
-      border_width   = opt[:border_width]   ? opt[:border_width].to_i : @default_border_width # 枠線の太さ
-      uscore_width   = opt[:uscore_width]   ? opt[:uscore_width].to_i : @default_uscore_width # アンダースコアの線の太さ
-      fill_color     = opt[:fill_color]     ? opt[:fill_color]        : [1.0, 1.0, 1.0]       # セルの背景色をRGB形式で指定。指定方法は配列形式で、0.0～1.0までの浮動小数表記でR,G,Bの各値を指定する。デフォルトは白。
-      border         = opt[:border]         ? opt[:border]            : nil                   # セルの枠線指定。(:top 上のみ,:bottom 下のみ,:left 左のみ,:right　右のみ)配列複数指定可
-      font_color     = opt[:font_color]     ? opt[:font_color]        : @font_color           # セル内の文字色をRGB形式で指定。
-      bold           = opt[:bold]           ? opt[:bold]              : false                 # セル内の文字を太字で表示する　(デフォルト: false)
+      unit_x         = opt[:x].to_f
+      unit_y         = opt[:y].to_f
+      unit_width     = opt[:width].to_f
+      unit_height    = opt[:height].to_f
+      text           = opt[:text].to_s
+      font_size      = opt[:font_size]      ? opt[:font_size].to_i    : @default_font_size
+      h_alignment    = opt[:h_align]        ? opt[:h_align]           : :left
+      v_alignment    = opt[:v_align]        ? opt[:v_align]           : :middle
+      without_border = opt[:without_border] ? opt[:without_border]    : false
+      under_score    = opt[:under_score]    ? opt[:under_score]       : false
+      border_width   = opt[:border_width]   ? opt[:border_width].to_i : @default_border_width
+      uscore_width   = opt[:uscore_width]   ? opt[:uscore_width].to_i : @default_uscore_width
+      fill_color     = opt[:fill_color]     ? opt[:fill_color]        : [1.0, 1.0, 1.0]
+      border         = opt[:border]         ? opt[:border]            : nil
+      font_color     = opt[:font_color]     ? opt[:font_color]        : @font_color
+      bold           = opt[:bold]           ? opt[:bold]              : false
 
-      # セル座標をPDF上の絶対座標へ変換。セル座標と絶対座標は、Y軸が反転しているので
-      # その差分を吸収する。
       x, y = convert_position(:x => unit_x, :y => unit_y)
       width, height = convert_position(:x => unit_width, :y => unit_height,
                                          :without_margin => true)
@@ -266,7 +264,6 @@ module Hreports
       current_page.show_text(Kconv.tosjis(text))
       current_page.end_text
 
-      # 太字を元に戻す
       if bold
         current_page.set_text_rendering_mode(HPDFDoc::HPDF_FILL)
       end
